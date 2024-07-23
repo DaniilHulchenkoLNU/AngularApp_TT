@@ -1,0 +1,14 @@
+<div *ngIf="cryptoRate.length > 0; else noData">
+  <ul>
+    <li *ngFor="let rate of cryptoRate">
+      <p>Name: {{ rate.name }}</p>
+      <p>Symbol: {{ rate.symbol }}</p>
+      <p>Price (USD): {{ rate.priceUsd }}</p>
+      <p>Change over 24h: {{ rate.changePercent24Hr }}%</p>
+      <button (click)="saveRate(rate)">Save</button>
+    </li>
+  </ul>
+</div>
+<ng-template #noData>
+  <p>No cryptocurrency data received or the list is empty.</p>
+</ng-template>
