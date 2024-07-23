@@ -1,5 +1,8 @@
-﻿using AngularApp_TT.Server.Models.Entity;
+﻿using AngularApp_TT.Server.Models.Auth;
+using AngularApp_TT.Server.Models.Entity;
 using AngularApp_TT.Server.Services;
+using DAL.Interfaces;
+using GlassStore.Server.Servise.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,17 +10,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AngularApp_TT.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     //[Authorize]
     public class CryptoController : ControllerBase
     {
 
         private readonly CryptoService _cryptoService;
+        private readonly iBaseRepository<СryptoRate, string> ctyptorepository;
+        private readonly UserServise userServise;
 
-        public CryptoController(CryptoService cryptoService)
+        public CryptoController(CryptoService cryptoService, iBaseRepository<СryptoRate, string> ctyptorepository, UserServise userServise)
         {
             _cryptoService = cryptoService;
+            this.ctyptorepository = ctyptorepository;
+            this.userServise = userServise;
         }
 
         // GET: api/<CryptoController>
@@ -48,9 +55,12 @@ namespace AngularApp_TT.Server.Controllers
         }
 
         [HttpPost("Save")]
-        public void Save([FromBody] СryptoRate rate)
+        public async Task<ActionResult> Save([FromBody] СryptoRate rate)
         {
-
+            rate.id = null;
+            rate.Accounts = await userServise.GetUser();
+            await ctyptorepository.Create(rate);
+            return Ok();
         }
 
         // GET api/<CryptoController>/5

@@ -42,7 +42,7 @@ namespace AngularApp_TT.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Account");
+                    b.ToTable("Account", (string)null);
 
                     b.HasData(
                         new
@@ -112,7 +112,7 @@ namespace AngularApp_TT.Server.Migrations
 
                     b.HasIndex("AccountsId");
 
-                    b.ToTable("СryptoRate");
+                    b.ToTable("СryptoRate", (string)null);
                 });
 
             modelBuilder.Entity("AngularApp_TT.Server.Models.Entity.СryptoRate", b =>

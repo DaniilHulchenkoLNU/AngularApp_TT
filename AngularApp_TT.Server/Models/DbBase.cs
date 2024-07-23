@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AngularApp_TT.Server.Models
 {
-    public class DbBase
+    public class DbBase<T>
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public T id { get; set; }
     }
 }

@@ -13,12 +13,12 @@ export class CryptoService {
 
   getRates(): Observable<СryptoRate[]> {
 
-    return this.http.get<СryptoRate[]>(`${environment.apiUrl[0]}/api/Crypto/`);
+    return this.http.get<СryptoRate[]>(`/crypto`);
 
   }
 
   saveRate(rate: СryptoRate): Observable<СryptoRate> {
-    // Предполагается, что у вас есть эндпоинт на сервере для сохранения криптовалюты
-    return this.http.post<СryptoRate>(`${environment.apiUrl[0]}/api/Crypto/Save`, rate);
+    return this.http.post<СryptoRate>(`/crypto/Save`, rate);
   }
 }
+

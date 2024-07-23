@@ -2,9 +2,8 @@
 
 namespace AngularApp_TT.Server.Models.Entity
 {
-    public class СryptoRate 
+    public class СryptoRate : DbBase<string>
     {
-        public string id { get; set; }
         public string rank { get; set; }
         public string symbol { get; set; }
         public string name { get; set; }
@@ -17,7 +16,7 @@ namespace AngularApp_TT.Server.Models.Entity
         public string vwap24Hr { get; set; }
         public string explorer { get; set; }
 
-        public int AccountsId { get; set; }
-        public virtual Accounts Accounts { get; set; }
+        public int? AccountsId { get; set; }
+        public virtual Accounts ?Accounts { get; set; }
     }
 }

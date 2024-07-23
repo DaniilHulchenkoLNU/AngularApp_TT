@@ -34,6 +34,10 @@ namespace AngularApp_TT.Data
                 .WithOne(c => c.Accounts)
                 .HasForeignKey(c => c.AccountsId);
 
+            modelBuilder.Entity<СryptoRate>()
+                .Property(c => c.id)
+                .ValueGeneratedOnAdd();
+
             SeedData(modelBuilder);
 
         }
@@ -43,7 +47,7 @@ namespace AngularApp_TT.Data
 
             modelBuilder.Entity<Accounts>().HasData(new Accounts
             {
-                Id = 1, // Убедитесь, что ID уникален и не конфликтует с уже существующими записями
+                id = 1, // Убедитесь, что ID уникален и не конфликтует с уже существующими записями
                 Email = "admin@example.com",
                 Password = "admin",
                 // UserHistoryList не нужно указывать при создании начальных данных

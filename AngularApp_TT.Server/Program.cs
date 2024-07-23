@@ -4,8 +4,10 @@ using AngularApp_TT.Server.DAL.Interfaces;
 using AngularApp_TT.Server.Service;
 using AngularApp_TT.Server.Services;
 using AngularApp_TT.Server.Servise.Auth;
+using AngularApp_TT.Server.Servise.Helpers;
 using DAL.Implementations;
 using DAL.Interfaces;
+using GlassStore.Server.Servise.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,10 +21,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddScoped(typeof(iBaseRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped(typeof(iBaseRepository<,>), typeof(BaseRepository<,>));
 builder.Services.AddScoped<iUserRepository, UserRepository>();
 builder.Services.AddScoped<AuthServise>();
+builder.Services.AddScoped<UserServise>();
 builder.Services.AddHttpClient<CryptoService>();
+builder.Services.AddScoped<HttpService>();
+
 /*################################### Auth ##################################################*/
 builder.Services.Configure<AuthOptions>(builder.Configuration.GetSection("Auth"));
 

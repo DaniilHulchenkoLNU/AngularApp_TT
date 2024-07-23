@@ -2,13 +2,14 @@
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using AngularApp_TT.Data;
+using Microsoft.OpenApi.Any;
 
 
 
 
 namespace DAL.Implementations
 {
-    public class BaseRepository<T> : iBaseRepository<T> where T : DbBase
+    public class BaseRepository<T, tId> : iBaseRepository<T, tId> where T : DbBase<tId>
     {
         private readonly ApplicationDbContext _db;
 
@@ -43,7 +44,7 @@ namespace DAL.Implementations
             return _db.Set<T>();
         }
 
-        public async Task<T> GetValueByID(int id)
+        public async Task<T> GetValueByID(tId id)
         {
             return await _db.Set<T>().FindAsync(id);
         }

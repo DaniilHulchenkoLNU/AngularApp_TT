@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AngularApp_TT.Server.DAL.Implementations
 {
-    public class UserRepository : BaseRepository<Accounts>, iUserRepository
+    public class UserRepository : BaseRepository<Accounts, int>, iUserRepository
     {
         private readonly DbSet<Accounts> _data;
         public UserRepository(ApplicationDbContext db) : base(db)

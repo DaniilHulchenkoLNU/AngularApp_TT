@@ -13,9 +13,9 @@ namespace AngularApp_TT.Server.Servise.Auth
     public class AuthServise
     {
         private readonly IOptions<AuthOptions> authoptions;
-        private readonly iBaseRepository<Accounts> accountsRepository;
+        private readonly iBaseRepository<Accounts, int> accountsRepository;
         private readonly iUserRepository authRepository;
-        public AuthServise(iUserRepository authRepository, IOptions<AuthOptions> authOptions, iBaseRepository<Accounts> AccountsRepository)
+        public AuthServise(iUserRepository authRepository, IOptions<AuthOptions> authOptions, iBaseRepository<Accounts, int> AccountsRepository)
         {
             this.authoptions = authOptions;
             accountsRepository = AccountsRepository;
@@ -42,7 +42,7 @@ namespace AngularApp_TT.Server.Servise.Auth
 
             var claims = new List<Claim>() {
                         //new Claim (JwtRegisteredClaimNames.NameId, user.Id),
-                        new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                        new Claim(JwtRegisteredClaimNames.Sub, user.id.ToString()),
                         new Claim (JwtRegisteredClaimNames.Email, user.Email),
 
                     };

@@ -11,9 +11,9 @@ namespace AngularApp_TT.Server.Controllers
     public class AuthController : ControllerBase // Tokens
     {
         private readonly AuthServise authServise;
-        private readonly iBaseRepository<Accounts> loginrepisitory;
+        private readonly iBaseRepository<Accounts, int> loginrepisitory;
 
-        public AuthController(AuthServise authServise, iBaseRepository<Accounts> loginrepisitory)
+        public AuthController(AuthServise authServise, iBaseRepository<Accounts, int> loginrepisitory)
         {
             this.loginrepisitory = loginrepisitory;
             this.authServise = authServise;
