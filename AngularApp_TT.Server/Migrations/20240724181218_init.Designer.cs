@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AngularApp_TT.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240723172932_id to Id")]
-    partial class idtoId
+    [Migration("20240724181218_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,11 +29,11 @@ namespace AngularApp_TT.Server.Migrations
 
             modelBuilder.Entity("AngularApp_TT.Server.Models.Auth.Accounts", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -43,14 +43,14 @@ namespace AngularApp_TT.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("Account");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            id = 1,
                             Email = "admin@example.com",
                             Password = "admin"
                         });
@@ -58,13 +58,11 @@ namespace AngularApp_TT.Server.Migrations
 
             modelBuilder.Entity("AngularApp_TT.Server.Models.Entity.СryptoRate", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AccountsId")
+                    b.Property<int?>("AccountsId")
                         .HasColumnType("int");
 
                     b.Property<string>("changePercent24Hr")
@@ -111,7 +109,7 @@ namespace AngularApp_TT.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.HasIndex("AccountsId");
 
@@ -122,9 +120,7 @@ namespace AngularApp_TT.Server.Migrations
                 {
                     b.HasOne("AngularApp_TT.Server.Models.Auth.Accounts", "Accounts")
                         .WithMany("UserHistoryList")
-                        .HasForeignKey("AccountsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AccountsId");
 
                     b.Navigation("Accounts");
                 });

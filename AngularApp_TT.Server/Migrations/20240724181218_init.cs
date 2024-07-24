@@ -28,8 +28,7 @@ namespace AngularApp_TT.Server.Migrations
                 name: "СryptoRate",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     rank = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     symbol = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -41,14 +40,14 @@ namespace AngularApp_TT.Server.Migrations
                     changePercent24Hr = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     vwap24Hr = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     explorer = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Accountsid = table.Column<int>(type: "int", nullable: true)
+                    AccountsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_СryptoRate", x => x.id);
                     table.ForeignKey(
-                        name: "FK_СryptoRate_Account_Accountsid",
-                        column: x => x.Accountsid,
+                        name: "FK_СryptoRate_Account_AccountsId",
+                        column: x => x.AccountsId,
                         principalTable: "Account",
                         principalColumn: "id");
                 });
@@ -59,9 +58,9 @@ namespace AngularApp_TT.Server.Migrations
                 values: new object[] { 1, "admin@example.com", "admin" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_СryptoRate_Accountsid",
+                name: "IX_СryptoRate_AccountsId",
                 table: "СryptoRate",
-                column: "Accountsid");
+                column: "AccountsId");
         }
 
         /// <inheritdoc />

@@ -55,9 +55,10 @@ namespace AngularApp_TT.Server.Controllers
         }
 
         [HttpPost("Save")]
+        //[Authorize]
         public async Task<ActionResult> Save([FromBody] СryptoRate rate)
         {
-            rate.id = null;
+            //rate.id = null;
             rate.Accounts = await userServise.GetUser();
             await ctyptorepository.Create(rate);
             return Ok();
